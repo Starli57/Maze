@@ -43,7 +43,10 @@ public static class MazeHelper
     {
         if (maze[y, x] == targetValue)
             return new Tuple<int, int>(x,y);
-        
+
+        int height = maze.GetLength(0);
+        int width = maze.GetLength(1);
+
         HashSet<Tuple<int,int>> visited = new HashSet<Tuple<int, int>>();
         LinkedList<Tuple<int, int>> shouldVisit = new LinkedList<Tuple<int, int>>();
 
@@ -65,6 +68,10 @@ public static class MazeHelper
             {
                 int newX = x + directions[i, 0];
                 int newY = y + directions[i, 1];
+
+                if (newX < 0 || newY < 0 || newX >= width || newY >= height)
+                    continue;
+
                 Tuple<int, int> newPoint = new Tuple<int, int>(newX, newY);
 
                 if (visited.Contains(newPoint) == false)
