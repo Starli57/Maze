@@ -9,4 +9,5 @@ Overall, this project is a fun and interactive way for users to explore maze gen
 
 It was built with Unity3d and C#
 
-Video: https://youtu.be/Trx0Q_iVJ8Y 
+# Video
+https://youtu.be/Trx0Q_iVJ8Y 
