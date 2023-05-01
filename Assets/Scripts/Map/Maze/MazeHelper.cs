@@ -39,8 +39,6 @@ public static class MazeHelper
         return GetClosest(maze, x, y, false);
     }
     
-    //This pathfinding uses DFS
-    //todo: implement A* for pathfindings
     private static Tuple<int, int> GetClosest(bool[,] maze, int x, int y, bool targetValue)
     {
         if (maze[y, x] == targetValue)

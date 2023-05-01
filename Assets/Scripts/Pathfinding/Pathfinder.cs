@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
+//This pathfinding uses DFS
+//todo: implement A* for pathfindings
 public class Pathfinder : MonoBehaviour
 {
     public List<Vector3> UpdatePath(Vector3 from, Vector3 to, Action<List<Vector3>> onPathUpdated = null)
@@ -30,13 +32,7 @@ public class Pathfinder : MonoBehaviour
         return path;
     }
         
-    private bool[,] _map { get { return _mapBuilder.map; } }
-    private Map _mapBuilder;
-
-    private void Awake()
-    {
-        _mapBuilder = FindObjectOfType<Map>();
-    }
+    private bool[,] _map { get { return DependenciesContainer.Instance.mapBuilder.map; } }
 
     private List<Vector3> GetPath(int fromX, int fromY, int toX, int toY)
     {

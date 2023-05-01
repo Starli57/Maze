@@ -18,12 +18,6 @@ public class GenerateMazeWidget : MonoBehaviour
     [SerializeField] private Slider _heightSlider;
     [SerializeField] private Slider _gapsSlider;
     [SerializeField] private Slider _cameraHeightSlider;
-
-    [Space]
-    [SerializeField] private MazeCamera _camera;
-
-    [Space]
-    [SerializeField] private MazeConfiguration _defaultConfiguration;
 #pragma warning restore 649
 
     private Map _mapBuilder;
@@ -32,14 +26,14 @@ public class GenerateMazeWidget : MonoBehaviour
     {
         _mapBuilder = FindObjectOfType<Map>();
 
-        _widthSlider.value = _defaultConfiguration.width;
-        _heightSlider.value = _defaultConfiguration.height;
-        _gapsSlider.value = _defaultConfiguration.gapsChance;
-        _cameraHeightSlider.value = _defaultConfiguration.cameraHeight;
+        _widthSlider.value = DependenciesContainer.Instance.mazeConfig.width;
+        _heightSlider.value = DependenciesContainer.Instance.mazeConfig.height;
+        _gapsSlider.value = DependenciesContainer.Instance.mazeConfig.gapsChance;
+        _cameraHeightSlider.value = DependenciesContainer.Instance.mazeConfig.cameraHeight;
     }
 
     private void LateUpdate()
     {
-        _camera.UpdateCameraHeight(_cameraHeightSlider.value);
+        DependenciesContainer.Instance.mazeCamera.UpdateCameraHeight(_cameraHeightSlider.value);
     }
 }

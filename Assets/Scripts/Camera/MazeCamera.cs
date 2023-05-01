@@ -1,17 +1,16 @@
 ﻿
 using UnityEngine;
 
+[RequireComponent(typeof(Camera))]
 public class MazeCamera : MonoBehaviour
 {
+    public new Camera camera { get; private set; }
+
     [SerializeField] private float _sidesOffset = 10;
     [SerializeField] private Vector3 _positionOffset = -Vector3.forward;
 
-    [Space]
-    [SerializeField] MazeConfiguration _defaultConfiguration;
-
     private float _heightOffset = 0;
 
-    private Map _mapBuilder;
     private Quaternion _defaultRotation;
 
     public void UpdateCameraHeight(float heightOffset)
@@ -22,21 +21,25 @@ public class MazeCamera : MonoBehaviour
 
     private void Awake()
     {
-        _mapBuilder = FindObjectOfType<Map>();
-        _heightOffset = _defaultConfiguration.cameraHeight;
+        camera = GetComponent<Camera>();
+
+        _heightOffset = DependenciesContainer.Instance.mazeConfig.cameraHeight;
         _defaultRotation = Quaternion.Euler(90, 0, 0);    
     }
 
     private void OnEnable()
     {
-        _mapBuilder.onMapChanged += AdjustCam;
+        DependenciesContainer.Instance.mapBuilder.onMapChanged += AdjustCam;
 
         AdjustCam();
     }
 
     private void OnDisable()
     {
-        _mapBuilder.onMapChanged -= AdjustCam;
+        if (DependenciesContainer.Instance != null)
+        {
+            DependenciesContainer.Instance.mapBuilder.onMapChanged -= AdjustCam;
+        }
     }
 
     private void AdjustCam()
@@ -46,11 +49,11 @@ public class MazeCamera : MonoBehaviour
 
     private void UpdatePosition()
     {
-        if (_mapBuilder != null && _mapBuilder.map == null)
+        if (DependenciesContainer.Instance.mapBuilder.map == null)
             return;
 
-        int mazeHeight = _mapBuilder.map.GetLength(0);
-        int mazeWidth = _mapBuilder.map.GetLength(1);
+        int mazeHeight = DependenciesContainer.Instance.mapBuilder.map.GetLength(0);
+        int mazeWidth = DependenciesContainer.Instance.mapBuilder.map.GetLength(1);
 
         Vector3 targetPosition = new Vector3(
             mazeWidth / 2, _heightOffset, mazeHeight / 2);

@@ -3,30 +3,25 @@ using UnityEngine;
 
 public class HeroController : MonoBehaviour
 {
-    private Map _mapBuilder;
     private PathContainer _pathContainer;
-    private Pathfinder _pathfinder;
-
-    private Camera _mainCamera;
+    private float _screenCastLength = 200;
 
     private void Awake()
     {
-        _mainCamera = Camera.main;
-
-        _mapBuilder = FindObjectOfType<Map>();
-        _pathfinder = FindObjectOfType<Pathfinder>();
-
         _pathContainer = GetComponent<PathContainer>();
     }
 
     private void OnEnable()
     {
-        _mapBuilder.onMapChanged += ResetPath;
+        DependenciesContainer.Instance.mapBuilder.onMapChanged += ResetPath;
     }
 
     private void OnDisable()
     {
-        _mapBuilder.onMapChanged -= ResetPath;
+        if (DependenciesContainer.Instance != null)
+        {
+            DependenciesContainer.Instance.mapBuilder.onMapChanged -= ResetPath;
+        }
     }
 
     private void Update()
@@ -34,14 +29,14 @@ public class HeroController : MonoBehaviour
         if (InputManager.HasClick())
         {
             RaycastHit hit;
-            if (Physics.Raycast(_mainCamera.ScreenPointToRay(InputManager.GetClickPosition()), out hit, 100))
+            if (Physics.Raycast(DependenciesContainer.Instance.mazeCamera.camera.ScreenPointToRay(InputManager.GetClickPosition()), out hit, _screenCastLength))
                 UpdatePath(hit.point);
         }
     }
 
     private void UpdatePath(Vector3 targetPosition)
     {
-        _pathfinder.UpdatePath(transform.position, targetPosition, _pathContainer.SetPath);
+        DependenciesContainer.Instance.pathfinder.UpdatePath(transform.position, targetPosition, _pathContainer.SetPath);
     }
 
     private void ResetPath()
