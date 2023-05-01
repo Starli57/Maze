@@ -1,4 +1,5 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,7 +7,7 @@ public class SliderValuePrinter : MonoBehaviour
 {
 #pragma warning disable 649
     [SerializeField] private Slider _slider;
-    [SerializeField] private Text _sliderValueText;
+    [SerializeField] private TextMeshProUGUI _sliderValueText;
 #pragma warning restore 649
 
     [Space]

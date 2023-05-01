@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e7742b237870ea409a82cc35bf1746b, type: 3}
   m_Name: DefaultMazeConfig
   m_EditorClassIdentifier: 
-  width: 15
-  height: 31
-  gapsChance: 0.02
+  width: 31
+  height: 15
+  gapsChance: 0.04
+  cameraHeight: 42
