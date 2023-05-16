@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class PathFollower : MonoBehaviour
 {
+    public float Speed
+    {
+        get
+        {
+            return _speed;
+        }
+        set
+        {
+            _speed = value;
+        }
+    }
+
     [SerializeField] private float _speed = 10;
 
     private PathContainer _pathContainer;
