@@ -39,7 +39,7 @@ public class Pathfinder : MonoBehaviour
         Node from = new Node(fromX, fromY);
         Node target = null;
 
-        var visited = new HashSet<Tuple<int, int>>();
+        var visited = new HashSet<(int, int)>();
         var shouldVisit = new LinkedList<Node>();
 
         shouldVisit.AddLast(from);
@@ -51,7 +51,7 @@ public class Pathfinder : MonoBehaviour
             int y = first.Value.y;
 
             shouldVisit.RemoveFirst();
-            visited.Add(new Tuple<int, int>(x,y));
+            visited.Add((x,y));
 
             if (x == toX && y == toY)
             {
@@ -77,7 +77,7 @@ public class Pathfinder : MonoBehaviour
         return path;
     }
 
-    private void AddVisitPoints(HashSet<Tuple<int, int>> visited, LinkedList<Node> shouldVisit, int x, int y, Node parent)
+    private void AddVisitPoints(HashSet<(int, int)> visited, LinkedList<Node> shouldVisit, int x, int y, Node parent)
     {
         var directions = MazeHelper.directions;
         for (int i = 0; i < directions.GetLength(0); i++)
@@ -86,7 +86,7 @@ public class Pathfinder : MonoBehaviour
             int newY = y + directions[i, 1];
 
             bool isRoad = MazeHelper.IsRoad(_map, newX, newY);
-            bool wasVisited = visited.Contains(new Tuple<int, int>(newX, newY));
+            bool wasVisited = visited.Contains((newX, newY));
 
             if (isRoad && wasVisited == false)
                 shouldVisit.AddLast(new Node(newX, newY, parent));
