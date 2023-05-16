@@ -1,10 +1,15 @@
 ﻿using System.Threading.Tasks;
 using UnityEngine;
 
+[RequireComponent(typeof(PathContainer))]
 public class HeroController : MonoBehaviour
 {
+    public void SetTargetPosition(Vector3 targetPosition)
+    {
+        UpdatePath(targetPosition);
+    }
+
     private PathContainer _pathContainer;
-    private float _screenCastLength = 200;
 
     private void Awake()
     {
@@ -21,16 +26,6 @@ public class HeroController : MonoBehaviour
         if (DependenciesContainer.Instance != null)
         {
             DependenciesContainer.Instance.mapBuilder.onMapChanged -= ResetPath;
-        }
-    }
-
-    private void Update()
-    {
-        if (InputManager.HasClick())
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(DependenciesContainer.Instance.mazeCamera.camera.ScreenPointToRay(InputManager.GetClickPosition()), out hit, _screenCastLength))
-                UpdatePath(hit.point);
         }
     }
 

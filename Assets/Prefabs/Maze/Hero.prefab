@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5497270472169889592}
   - component: {fileID: 1517764215}
   - component: {fileID: 2025587216}
+  - component: {fileID: 6436092652496486096}
   - component: {fileID: 3660563864714967098}
   - component: {fileID: 8984829976267463325}
   - component: {fileID: 2025587215}
@@ -33,6 +34,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -86,6 +88,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 444d940a9b95c2941a70f565c2910a18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6436092652496486096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5205989773797361994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e5bc04ed6d1d564191cb39cd594e5aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!33 &3660563864714967098
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -105,10 +119,12 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -133,6 +149,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!120 &2025587215
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -144,10 +161,12 @@ LineRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
