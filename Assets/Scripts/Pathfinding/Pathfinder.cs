@@ -41,9 +41,7 @@ public class Pathfinder : MonoBehaviour
 
         var visited = new HashSet<(int, int)>();
         var shouldVisit = new LinkedList<Node>();
-
-        shouldVisit.AddLast(from);
-        visited.Add((from.x, from.y));
+        AddVisitPoint(visited, shouldVisit, from.x, from.y, from.parent);
 
         while (shouldVisit.Count > 0)
         {
