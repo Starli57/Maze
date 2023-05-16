@@ -43,15 +43,15 @@ public class Pathfinder : MonoBehaviour
         var shouldVisit = new LinkedList<Node>();
 
         shouldVisit.AddLast(from);
+        visited.Add((from.x, from.y));
 
-        while(shouldVisit.Count > 0)
+        while (shouldVisit.Count > 0)
         {
             var first = shouldVisit.First;
             int x = first.Value.x;
             int y = first.Value.y;
 
             shouldVisit.RemoveFirst();
-            visited.Add((x,y));
 
             if (x == toX && y == toY)
             {
@@ -59,7 +59,7 @@ public class Pathfinder : MonoBehaviour
                 break;
             }
 
-            AddVisitPoints(visited, shouldVisit, x, y, first.Value);
+            AddClosestPoints(visited, shouldVisit, x, y, first.Value);
         }
 
         return BuildPath(target);
@@ -77,7 +77,7 @@ public class Pathfinder : MonoBehaviour
         return path;
     }
 
-    private void AddVisitPoints(HashSet<(int, int)> visited, LinkedList<Node> shouldVisit, int x, int y, Node parent)
+    private void AddClosestPoints(HashSet<(int, int)> visited, LinkedList<Node> shouldVisit, int x, int y, Node parent)
     {
         var directions = MazeHelper.directions;
         for (int i = 0; i < directions.GetLength(0); i++)
@@ -86,10 +86,16 @@ public class Pathfinder : MonoBehaviour
             int newY = y + directions[i, 1];
 
             bool isRoad = MazeHelper.IsRoad(_map, newX, newY);
-            bool wasVisited = visited.Contains((newX, newY));
+            if (isRoad) AddVisitPoint(visited, shouldVisit, newX, newY, parent);
+        }
+    }
 
-            if (isRoad && wasVisited == false)
-                shouldVisit.AddLast(new Node(newX, newY, parent));
+    private void AddVisitPoint(HashSet<(int, int)> visited, LinkedList<Node> shouldVisit, int x, int y, Node parent)
+    {
+        if (visited.Contains((x, y)) == false)
+        {
+            shouldVisit.AddLast(new Node(x, y, parent));
+            visited.Add((x, y));
         }
     }
 
