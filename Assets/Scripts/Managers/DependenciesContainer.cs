@@ -13,7 +13,6 @@ public class DependenciesContainer : MonoBehaviour
 				_instance = FindObjectOfType<DependenciesContainer>();
             }
 
-			Assert.IsNotNull(_instance, "DependenciesContainer must have instance in a scene");
 			return _instance;
 		}
     }

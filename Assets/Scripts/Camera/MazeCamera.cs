@@ -6,7 +6,6 @@ public class MazeCamera : MonoBehaviour
 {
     public new Camera camera { get; private set; }
 
-    [SerializeField] private float _sidesOffset = 10;
     [SerializeField] private Vector3 _positionOffset = -Vector3.forward;
 
     private float _heightOffset = 0;
